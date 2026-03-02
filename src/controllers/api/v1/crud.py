@@ -21,18 +21,19 @@ except Exception as error:
     print("Database not connected")
     print("Error =",error)
 
-#Create
+#Base Model
 class Check(BaseModel):
     id : int
     name : str
     age : int
 
+#Create
 @router.post("/")
 def create(data : Check):
     cursor.execute(
         f"""
             insert into 
-            "user" (id,name, age) 
+            "coustomer" (id,name, age) 
             values (%s,%s, %s) 
             returning *
         """,
@@ -43,8 +44,9 @@ def create(data : Check):
         )
     )
     connection.commit()
-    user = cursor.fetchone()
-    return{"user" : user}
+    coustomer = cursor.fetchone()
+    return{"coustomer" : coustomer}
+
 
 #Read
 @router.get("/")
@@ -53,19 +55,21 @@ def read():
         """
             select 
                 *
-            from "user"
+            from "coustomer"
+            order by id Asc
         """
     )
 
-    user = cursor.fetchall()
-    return{"user" : user}
+    coustomer = cursor.fetchall()
+    return{"coustomer" : coustomer}
+
 
 #Update
-@router.put("/{id}")
+@router.put("/")
 def update(data : Check):
     cursor.execute(
         f"""
-            update "user"
+            update "coustomer"
             set name = %s,
                 age = %s
             where id = %s
@@ -78,14 +82,16 @@ def update(data : Check):
         )
     )
     connection.commit()
-    user = cursor.fetchone()
-    return{"user" : user}
+    coustomer = cursor.fetchone()
+    return{"coustomer" : coustomer}
 
+
+#Delete
 @router.delete("/{id}")
 def delete(id:int):
     cursor.execute(
         f"""
-            delete from "user"
+            delete from "coustomer"
             where id = %s
         """,
         (
