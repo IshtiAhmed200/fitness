@@ -1,13 +1,8 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
+from src.schemas.v1.check import Student_info_check 
 
 router = APIRouter()
 
-class Check(BaseModel):
-    id : int
-    name : str
-    department : str
-
 @router.post("/")
-def student_info(data : Check):
+def student_info(data : Student_info_check):
     return{"data" : data}
