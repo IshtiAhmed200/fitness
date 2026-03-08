@@ -7,6 +7,7 @@ from src.controllers.api.v1 import laptop_controller
 from src.controllers.api.v1 import mobile_controller
 from src.controllers.api.v1 import student
 from src.controllers.api.v1 import teacher
+from src.controllers.api.v1 import user_controller
 
 
 router = APIRouter()
@@ -20,7 +21,7 @@ router.include_router(laptop_controller.router, prefix="/laptop")
 router.include_router(mobile_controller.router, prefix="/mobile")
 router.include_router(student.router, prefix="/student")
 router.include_router(teacher.router, prefix="/teacher")
-
+router.include_router(user_controller.router, prefix="/users")
 
 
 
