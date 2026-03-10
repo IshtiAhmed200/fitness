@@ -1,12 +1,12 @@
 from fastapi import APIRouter
-from src.schemas.v1.check import Customer_info_check
+from src.schemas.v1.customer_shcema import Customer
 from src.database_connection.connection import cursor, connection
 
 router = APIRouter()
 
 #Create 
 @router.post("/")
-def create_customer(data : Customer_info_check):
+def create_customer(data : Customer):
     cursor.execute(
         f"""
             insert into
@@ -59,7 +59,7 @@ def read_by_id(id : int):
 
 #Update
 @router.put("/")
-def create(data : Customer_info_check):
+def create(data : Customer):
     cursor.execute(
         f"""
             update "customer_info"

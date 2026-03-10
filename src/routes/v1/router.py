@@ -1,13 +1,19 @@
 from fastapi import APIRouter
 from src.controllers.api.v1 import bike_controllers
 from src.controllers.api.v1 import car_controllers
+
 from src.controllers.api.v1 import customer_info
+
 from src.controllers.api.v1 import election_controllers
 from src.controllers.api.v1 import home_controllers
 from src.controllers.api.v1 import laptop_controllers
 from src.controllers.api.v1 import mobile_controllers
+
 from src.controllers.api.v1 import student_info
 from src.controllers.api.v1 import teachers_info
+
+from src.controllers.api.v1.user import user_controller
+
 
 
 router = APIRouter()
@@ -25,5 +31,8 @@ router.include_router(mobile_controllers.router, prefix="/mobile")
 
 router.include_router(student_info.router, prefix="/student")
 router.include_router(teachers_info.router, prefix="/teacher")
+
+router.include_router(user_controller.router, prefix="/user")
+
 
 
